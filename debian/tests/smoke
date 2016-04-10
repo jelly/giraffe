@@ -37,7 +37,16 @@ EOF
 cd debian/tests
 export AUTH_USER='testadmin'
 export AUTH_PASS='r00tme'
-nosetests
+nosetests test_server.py
 
 echo 'Smoke test of zarafa server succesful'
+
+zarafa-admin  -c testgateway -p r00tme \
+              -e gateway@example.com -f "Gateway user" | grep -qs "User created."
+zarafa-admin -u testgateway --enable-feature imap
+zarafa-admin -u testgateway --enable-feature pop3
+
+export AUTH_USER='testgateway'
+nosetests test_gateway.py
+
 exit 0
