@@ -4,3 +4,4 @@ Be-pessimistic-about-daemon-startup.patch
 Rename-libmapi-to-libzarafa_mapi.patch
 Remove-archiver-related-code.patch
 Remove-references-to-licensed.patch
+zarafa-gateway-connect-to-IPv4-zarafa-server-addr.patch

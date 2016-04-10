@@ -1,0 +1,30 @@
+From dfbfcec6b56e25e76b7b2430ebc1da438cadce76 Mon Sep 17 00:00:00 2001
+From: Jelle van der Waa <jelle@vdwaa.nl>
+Date: Sun, 10 Apr 2016 13:56:24 +0200
+Subject: [PATCH] zarafa-gateway connect to IPv4 zarafa-server addr
+
+The client code seems to try to connect to an IPv6
+address when specifing "localhost" while the zarafa-server
+does not listen on an IPv6 address.
+
+Work around the problem for now by patching the configuration file.
+---
+ installer/linux/gateway.cfg | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/installer/linux/gateway.cfg b/installer/linux/gateway.cfg
+index 7deb9f2..3a7b5c4 100644
+--- a/installer/linux/gateway.cfg
++++ b/installer/linux/gateway.cfg
+@@ -4,7 +4,7 @@
+ server_bind	=	0.0.0.0
+ 
+ # Please refer to the administrator manual or manpage why HTTP is used rather than the UNIX socket.
+-server_socket	=	http://localhost:236/zarafa
++server_socket	=	http://127.0.0.1:236/zarafa
+ 
+ # Set this value to a name to show in the logon greeting to clients.
+ # Leave empty to use DNS to find this name.
+-- 
+2.8.0
+
